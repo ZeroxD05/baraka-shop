@@ -590,7 +590,48 @@
       .empty p {
         color: var(--muted);
       }
+      .footer {
+        background: #111;
+        color: #fff;
+        padding: 30px 20px;
+        text-align: center;
+        font-size: 14px;
+      }
 
+      .footer-links {
+        margin: 15px 0;
+      }
+
+      .footer-links a {
+        color: #ccc;
+        text-decoration: none;
+        margin: 0 10px;
+        transition: 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: #fff;
+      }
+
+      .ft-ar {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .footer-copy {
+        margin-top: 10px;
+        font-size: 13px;
+        color: #aaa;
+      }
+
+      /* Mobile */
+      @media (max-width: 600px) {
+        .footer-links {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
       /* CHECKOUT */
       .cof {
         display: flex;
@@ -905,9 +946,19 @@
 
     <main id="main"></main>
 
-    <footer>
+    <footer class="footer">
       <p class="ft-ar">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
-      <p>
+
+      <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="/agb.html">AGB</a>
+        <a href="/kontakt.html">Kontakt</a>
+        <a href="/widerruf.html">Widerrufsrecht</a>
+        <a href="/versand.html">Versand & Zahlung</a>
+      </div>
+
+      <p class="footer-copy">
         © 2025 Al-Baraka Shop · Alle Preise inkl. MwSt. · Halal &amp;
         Sunnah-konform
       </p>
@@ -1217,7 +1268,7 @@
       <p>Neuheiten, Angebote & islamische Tipps direkt in dein Postfach.</p>
       ${
         nlDone
-          ? '<p class="nl-ok">Jazakallahu Khairan! Du bist angemeldet.</p>'
+          ? '<p class="nl-ok">Jazakallahu Khairan!</p>'
           : `
       <div class="nl-form">
         <input type="email" id="nl-email" placeholder="deine@email.de">
