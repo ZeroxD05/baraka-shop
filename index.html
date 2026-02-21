@@ -1,0 +1,1560 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Al-Baraka Shop</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --cream: #faf6ef;
+        --sand: #e8dcc8;
+        --gold: #c8a84b;
+        --gold-l: #e2c96d;
+        --gold-d: #9a7a2e;
+        --green: #2d5016;
+        --green-m: #3d6b20;
+        --green-l: #4a7d28;
+        --text: #1a1208;
+        --muted: #6b5b3a;
+        --white: #fff;
+        --shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        --r: 12px;
+      }
+      body {
+        font-family: "Lato", sans-serif;
+        background: var(--cream);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      button {
+        font-family: "Lato", sans-serif;
+        cursor: pointer;
+      }
+      input,
+      select {
+        font-family: "Lato", sans-serif;
+      }
+
+      /* HEADER */
+      .hdr {
+        background: var(--green);
+        padding: 0 24px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+        transition:
+          background 0.25s ease,
+          backdrop-filter 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+      .hdr.scrolled {
+        background: rgba(45, 80, 22, 0.62);
+        backdrop-filter: blur(6px) saturate(120%);
+        -webkit-backdrop-filter: blur(6px) saturate(120%);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+      }
+      .hdr-i {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 72px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .logo-ar {
+        font-family: "Amiri", serif;
+        font-size: 28px;
+        color: var(--gold);
+      }
+      .logo-tx {
+        font-family: "Playfair Display", serif;
+        font-size: 19px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.4px;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .nav-btn {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 15px;
+        padding: 6px 14px;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
+      .nav-btn:hover,
+      .nav-btn.active {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .cart-btn {
+        position: relative;
+        background: var(--gold);
+        border: none;
+        color: var(--green);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        font-size: 20px;
+      }
+      .cart-btn:hover {
+        background: var(--gold-l);
+      }
+      .badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #e74c3c;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* HERO */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          var(--green) 0%,
+          var(--green-m) 60%,
+          #1a3a0a 100%
+        );
+        padding: 72px 24px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg%20width='60'%20height='60'%20viewBox='0%200%2060%2060'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cg%20fill='%23C8A84B'%20fill-opacity='0.06'%3E%3Cpath%20d='M30%204%20L36%2022%20L54%2022%20L40%2034%20L46%2052%20L30%2040%20L14%2052%20L20%2034%20L6%2022%20L24%2022%20Z'/%3E%3C/g%3E%3C/svg%3E");
+        background-size: 60px;
+        background-repeat: repeat;
+        background-position: center;
+      }
+      .hero-c {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .hero-ar {
+        font-family: "Amiri", serif;
+        font-size: 40px;
+        color: var(--gold);
+        display: block;
+        margin-bottom: 6px;
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 36px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 12px;
+      }
+      .hero p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .divider {
+        width: 50px;
+        height: 2px;
+        background: var(--gold);
+        margin: 16px auto;
+      }
+
+      /* NEWSLETTER STRIP */
+      .nl-strip {
+        background: var(--sand);
+        border-top: 2px solid var(--gold);
+        border-bottom: 2px solid var(--gold);
+        padding: 26px 24px;
+      }
+      .nl-inner {
+        max-width: 580px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        text-align: center;
+      }
+      .nl-strip h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 19px;
+        color: var(--green);
+      }
+      .nl-strip p {
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .nl-form {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        max-width: 420px;
+      }
+      .nl-form input {
+        flex: 1;
+        padding: 11px 15px;
+        border: 1.5px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .nl-form input:focus {
+        border-color: var(--gold);
+      }
+      .btn-nl {
+        background: var(--green);
+        color: #fff;
+        border: none;
+        padding: 11px 18px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+        transition: background 0.2s;
+      }
+      .btn-nl:hover {
+        background: var(--green-l);
+      }
+      .nl-ok {
+        color: var(--green);
+        font-weight: 700;
+        font-size: 15px;
+      }
+
+      /* PRODUCTS */
+      .prods {
+        padding: 56px 24px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .sec-hdr {
+        text-align: center;
+        margin-bottom: 44px;
+      }
+      .sec-hdr h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 30px;
+        color: var(--green);
+        margin-bottom: 6px;
+      }
+      .sec-hdr p {
+        color: var(--muted);
+      }
+      .gold-line {
+        width: 48px;
+        height: 2px;
+        background: var(--gold);
+        margin: 10px auto 0;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 26px;
+      }
+      .card {
+        background: #fff;
+        border-radius: var(--r);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(200, 168, 75, 0.15);
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 480ms ease,
+          transform 480ms ease;
+      }
+      .card.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .card:hover {
+        transform: none;
+        box-shadow: var(--shadow);
+      }
+      .card-img {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 84px;
+        background: linear-gradient(135deg, var(--sand), var(--cream));
+        position: relative;
+      }
+      .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .card-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: var(--green);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        padding: 4px 9px;
+        border-radius: 4px;
+      }
+      .card-body {
+        padding: 18px;
+      }
+      .card-name {
+        font-family: "Playfair Display", serif;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+      .card-desc {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 14px;
+      }
+      .card-foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .card-price {
+        font-size: 21px;
+        font-weight: 700;
+        color: var(--green);
+        font-family: "Playfair Display", serif;
+      }
+      .card-price small {
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--muted);
+        margin-left: 2px;
+      }
+      .btn-add {
+        background: var(--gold);
+        color: var(--green);
+        border: none;
+        padding: 9px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: background 0.2s;
+      }
+      .btn-add:hover {
+        background: var(--gold-l);
+      }
+      .btn-add.added {
+        background: var(--green);
+        color: #fff;
+      }
+
+      /* PAGE CONTAINERS */
+      .page {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 48px 24px;
+      }
+
+      main {
+        flex: 1;
+      }
+      .page-title {
+        font-family: "Playfair Display", serif;
+        font-size: 27px;
+        color: var(--green);
+        margin-bottom: 6px;
+      }
+      .page-sub {
+        color: var(--muted);
+        font-size: 15px;
+        margin-bottom: 28px;
+      }
+
+      /* CART */
+      .cart-items {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+      .ci {
+        background: #fff;
+        border-radius: var(--r);
+        padding: 16px 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(200, 168, 75, 0.1);
+      }
+      .ci-em {
+        font-size: 38px;
+        width: 52px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .ci-info {
+        flex: 1;
+      }
+      .ci-name {
+        font-family: "Playfair Display", serif;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .ci-pr {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .qty-ctrl {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .qbtn {
+        width: 30px;
+        height: 30px;
+        border: 1.5px solid var(--sand);
+        background: #fff;
+        border-radius: 6px;
+        font-size: 17px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--green);
+        transition: all 0.2s;
+      }
+      .qbtn:hover {
+        background: var(--green);
+        color: #fff;
+        border-color: var(--green);
+      }
+      .qnum {
+        font-weight: 700;
+        min-width: 22px;
+        text-align: center;
+      }
+      .ci-tot {
+        font-weight: 700;
+        font-size: 15px;
+        color: var(--green);
+        min-width: 55px;
+        text-align: right;
+      }
+      .summary {
+        background: #fff;
+        border-radius: var(--r);
+        padding: 22px;
+        box-shadow: var(--shadow);
+        margin-bottom: 22px;
+      }
+      .srow {
+        display: flex;
+        justify-content: space-between;
+        padding: 7px 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .stot {
+        display: flex;
+        justify-content: space-between;
+        padding: 14px 0 0;
+        border-top: 2px solid var(--sand);
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--green);
+        font-family: "Playfair Display", serif;
+      }
+      .btn-p {
+        width: 100%;
+        background: var(--green);
+        color: #fff;
+        border: none;
+        padding: 15px;
+        border-radius: var(--r);
+        font-family: "Playfair Display", serif;
+        font-size: 16px;
+        font-weight: 700;
+        transition: background 0.2s;
+        margin-bottom: 10px;
+      }
+      .btn-p:hover {
+        background: var(--green-l);
+      }
+      .btn-p:disabled {
+        opacity: 0.65;
+      }
+      .btn-s {
+        width: 100%;
+        background: transparent;
+        color: var(--muted);
+        border: 1.5px solid var(--sand);
+        padding: 12px;
+        border-radius: var(--r);
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+      .btn-s:hover {
+        border-color: var(--green);
+        color: var(--green);
+      }
+      .empty {
+        text-align: center;
+        padding: 80px 0;
+      }
+      .empty-ic {
+        font-size: 64px;
+        margin-bottom: 18px;
+      }
+      .empty h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 21px;
+        color: var(--green);
+        margin-bottom: 6px;
+      }
+      .empty p {
+        color: var(--muted);
+      }
+
+      /* CHECKOUT */
+      .cof {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .fg {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .fr {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .flabel {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--muted);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+      .finput {
+        padding: 12px 15px;
+        border: 1.5px solid var(--sand);
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+        color: var(--text);
+        width: 100%;
+      }
+      .finput:focus {
+        border-color: var(--gold);
+      }
+      .fsec {
+        font-family: "Playfair Display", serif;
+        font-size: 17px;
+        color: var(--green);
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--sand);
+        margin-top: 6px;
+      }
+      .ferr {
+        color: #e74c3c;
+        font-size: 12px;
+      }
+      .omini {
+        background: var(--sand);
+        border-radius: var(--r);
+        padding: 16px 18px;
+        margin-bottom: 22px;
+      }
+      .omini h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 15px;
+        margin-bottom: 10px;
+        color: var(--green);
+      }
+      .orow {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--muted);
+        padding: 3px 0;
+      }
+      .ototrow {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 700;
+        padding-top: 9px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        color: var(--green);
+      }
+      .cbx {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+      }
+      .cbx input {
+        margin-top: 3px;
+        accent-color: var(--green);
+        width: 15px;
+        height: 15px;
+      }
+      .cbx label {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      /* CONFIRMATION */
+      .conf {
+        text-align: center;
+      }
+      .conf-ic {
+        width: 84px;
+        height: 84px;
+        background: var(--green);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 22px;
+        font-size: 38px;
+        animation: pop 0.5s ease;
+      }
+      @keyframes pop {
+        0% {
+          transform: scale(0);
+        }
+        80% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .onbox {
+        background: var(--sand);
+        border: 2px dashed var(--gold);
+        border-radius: var(--r);
+        padding: 18px;
+        margin: 20px 0;
+        display: inline-block;
+        width: 100%;
+      }
+      .onlabel {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--muted);
+        margin-bottom: 5px;
+      }
+      .onval {
+        font-family: "Amiri", serif;
+        font-size: 26px;
+        color: var(--green);
+        font-weight: 700;
+        letter-spacing: 2px;
+      }
+      .enote {
+        background: #fff;
+        border-left: 4px solid var(--gold);
+        border-radius: 0 var(--r) var(--r) 0;
+        padding: 14px 18px;
+        text-align: left;
+        margin: 16px 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .enote strong {
+        color: var(--green);
+      }
+      .dua {
+        font-family: "Amiri", serif;
+        font-size: 22px;
+        color: var(--gold-d);
+        margin: 24px 0 4px;
+      }
+      .dua-tr {
+        font-size: 12px;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .order-items-box {
+        background: #fff;
+        border-radius: var(--r);
+        padding: 18px;
+        margin-top: 18px;
+        box-shadow: var(--shadow);
+        text-align: left;
+      }
+      .oi-title {
+        font-family: "Playfair Display", serif;
+        font-size: 16px;
+        color: var(--green);
+        margin-bottom: 12px;
+      }
+      .oi-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        font-size: 13px;
+        color: var(--muted);
+        border-bottom: 1px solid var(--sand);
+      }
+      .oi-tot {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0 0;
+        font-weight: 700;
+        color: var(--green);
+        font-family: "Playfair Display", serif;
+        font-size: 17px;
+      }
+      .addr-box {
+        margin-top: 12px;
+        padding: 10px;
+        background: var(--sand);
+        border-radius: 8px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--green);
+        text-align: center;
+        padding: 26px 24px;
+      }
+      .ft-ar {
+        font-family: "Amiri", serif;
+        font-size: 21px;
+        color: var(--gold);
+        margin-bottom: 6px;
+      }
+      footer p {
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 12px;
+      }
+
+      @media (max-width: 600px) {
+        .fr {
+          grid-template-columns: 1fr;
+        }
+        .hero h1 {
+          font-size: 26px;
+        }
+        .nl-form {
+          flex-direction: column;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* PAGE TRANSITIONS */
+      .page-wrap {
+        animation: fadein 0.3s ease;
+      }
+      @keyframes fadein {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hdr">
+      <div class="hdr-i">
+        <div class="logo" onclick="showPage('shop')">
+          <span class="logo-ar">البركة</span>
+          <span class="logo-tx">Al-Baraka Shop</span>
+        </div>
+        <nav class="nav">
+          <button
+            class="nav-btn active"
+            id="nav-shop"
+            onclick="showPage('shop')"
+          >
+            Produkte
+          </button>
+          <button
+            class="cart-btn"
+            onclick="showPage('cart')"
+            aria-label="Warenkorb"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 6h13l-1.5 9h-11z"></path>
+              <circle cx="9" cy="20" r="1.5"></circle>
+              <circle cx="18" cy="20" r="1.5"></circle>
+            </svg>
+            <span class="badge" id="cart-badge" style="display: none">0</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main"></main>
+
+    <footer>
+      <p class="ft-ar">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+      <p>
+        © 2025 Al-Baraka Shop · Alle Preise inkl. MwSt. · Halal &amp;
+        Sunnah-konform
+      </p>
+    </footer>
+
+    <!-- Use official @emailjs/browser bundle from jsDelivr (new SDK) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser/dist/email.min.js"></script>
+    <!-- Local copy fallback (kept for offline) -->
+    <!-- <script src="./email.min.js"></script> -->
+    <script>
+      const PRODUCTS = [
+        {
+          id: 1,
+          em: "",
+          name: "Miswak Premium",
+          badge: "Sunnah",
+          desc: "Natürlicher Zahnreiniger aus Arak-Holz. Antibakteriell, stärkt Zahnfleisch & Sunnah des Propheten ﷺ.",
+          price: 3.99,
+          unit: "Stück",
+        },
+        {
+          id: 2,
+          em: "",
+          name: "Miswak 5er Pack",
+          badge: "Bestseller",
+          desc: "Das praktische 5er-Set – ideal für die ganze Familie. Frisch verpackt aus Medinah.",
+          price: 14.99,
+          unit: "Set",
+        },
+        {
+          id: 3,
+          em: "",
+          name: "Medjool Datteln 500g",
+          badge: "Premium",
+          desc: "Saftige Medjool-Datteln Güteklasse A – die Königin der Datteln. Handverlesen, ohne Zusätze.",
+          price: 8.99,
+          unit: "500g",
+        },
+        {
+          id: 4,
+          em: "",
+          name: "Ajwa Datteln 250g",
+          badge: "Sunnah",
+          desc: "Die heilige Dattel aus Medinah. Über den Propheten ﷺ überliefert. Dunkel, zart & aromatisch.",
+          price: 12.49,
+          unit: "250g",
+        },
+        {
+          id: 5,
+          em: "",
+          name: "Deglet Nour 1kg",
+          badge: "Familienpack",
+          desc: "Goldgelbe, halbtrocken Datteln – perfekt zum Iftar & Kochen. Naturbelassen.",
+          price: 9.99,
+          unit: "1kg",
+        },
+        {
+          id: 6,
+          em: "",
+          name: "Kufi Mütze – Weiß",
+          badge: "Klassisch",
+          desc: "Traditionelle weiße Kufi-Gebetsmütze aus Baumwolle. Leicht, atmungsaktiv, handgefertigt.",
+          price: 7.99,
+          unit: "Stück",
+        },
+        {
+          id: 7,
+          em: "",
+          name: "Kufi – Creme Stickerei",
+          badge: "Handarbeit",
+          desc: "Elegante Kufi in Creme mit traditionellem Stickereimuster. 100% Baumwolle, handgefertigt.",
+          price: 12.99,
+          unit: "Stück",
+        },
+        {
+          id: 8,
+          em: "",
+          name: "Kufi – Schwarz Gehäkelt",
+          badge: "Traditionell",
+          desc: "Handgehäkelte schwarze Kufi im marokkanischen Stil. Robuste Qualität, sitzt sicher.",
+          price: 10.99,
+          unit: "Stück",
+        },
+      ];
+
+      let cart = [];
+      let currentOrder = null;
+      let nlDone = false;
+
+      // EmailJS initialisieren (ersetze den Key falls nötig)
+      try {
+        if (window.emailjs && typeof emailjs.init === "function") {
+          emailjs.init("9n_IzzLSxM5ouT5z2");
+          window.__emailjs_inited = true;
+          debugLog("EmailJS init during load");
+        }
+      } catch (e) {
+        console.warn("EmailJS init failed", e);
+      }
+
+      // Ensure EmailJS is initialised (safe to call multiple times)
+      function ensureEmailJSInit() {
+        try {
+          if (
+            window.emailjs &&
+            typeof emailjs.init === "function" &&
+            !window.__emailjs_inited
+          ) {
+            emailjs.init("9n_IzzLSxM5ouT5z2");
+            window.__emailjs_inited = true;
+            debugLog("ensureEmailJSInit: init called");
+          }
+        } catch (e) {
+          console.warn("ensureEmailJSInit failed", e);
+        }
+      }
+
+      // Visible debug log helper (zeigt Meldungen auf der Seite und in der Konsole)
+      function debugLog(msg) {
+        try {
+          console.log(msg);
+          const el = document.getElementById("debug-log");
+          if (el) {
+            el.style.display = "block";
+            const d = document.createElement("div");
+            d.textContent = new Date().toLocaleTimeString() + " " + msg;
+            el.appendChild(d);
+            el.scrollTop = el.scrollHeight;
+          }
+        } catch (e) {}
+      }
+
+      // Helper: dynamisch EmailJS SDK nachladen
+      function loadEmailJSSDK(version = "3.2.0", timeout = 7000) {
+        return new Promise((resolve, reject) => {
+          if (window.emailjs) {
+            debugLog("loadEmailJSSDK: EmailJS already available");
+            return resolve();
+          }
+          // prevent multiple concurrent loads
+          if (window.__emailjs_loading) {
+            debugLog("loadEmailJSSDK: already loading, waiting...");
+            const check = setInterval(() => {
+              if (window.emailjs) {
+                clearInterval(check);
+                debugLog("loadEmailJSSDK: available after concurrent load");
+                return resolve();
+              }
+            }, 200);
+            // also add a timeout fallback
+            setTimeout(() => {
+              clearInterval(check);
+              if (window.emailjs) resolve();
+              else
+                reject(
+                  new Error("Timeout waiting for concurrent EmailJS load"),
+                );
+            }, timeout);
+            return;
+          }
+          window.__emailjs_loading = true;
+          const existing = document.querySelector(
+            `script[src*="cdn.emailjs.com/sdk/${version}/email.min.js"]`,
+          );
+          // If there's already a script element but it didn't set window.emailjs,
+          // append a new script with a cache-busting query to force reload.
+          const makeAndAppend = (src) => {
+            const s = document.createElement("script");
+            s.src = src;
+            s.async = true;
+            let to = setTimeout(() => {
+              to = null;
+              window.__emailjs_loading = false;
+              debugLog("loadEmailJSSDK: timeout loading SDK");
+              reject(new Error("Timeout loading EmailJS SDK"));
+            }, timeout);
+            s.addEventListener("load", () => {
+              debugLog("loadEmailJSSDK: script load event");
+              if (to) {
+                clearTimeout(to);
+                to = null;
+              }
+              // small delay to allow script to initialise
+              setTimeout(() => {
+                window.__emailjs_loading = false;
+                if (window.emailjs) resolve();
+                else {
+                  debugLog("loadEmailJSSDK: emailjs missing after load");
+                  reject(new Error("EmailJS not available after load"));
+                }
+              }, 80);
+            });
+            s.addEventListener("error", () => {
+              debugLog("loadEmailJSSDK: script error");
+              if (to) {
+                clearTimeout(to);
+                to = null;
+              }
+              window.__emailjs_loading = false;
+              reject(new Error("Failed to load EmailJS SDK"));
+            });
+            document.head.appendChild(s);
+            debugLog("loadEmailJSSDK: appended script " + src);
+          };
+
+          if (existing) {
+            debugLog(
+              "loadEmailJSSDK: existing script element found, will force-reload with cache-bust",
+            );
+            const src = `https://cdn.emailjs.com/sdk/${version}/email.min.js?_=${Date.now()}`;
+            makeAndAppend(src);
+            return;
+          }
+
+          // no existing script -> append normal
+          const src = `https://cdn.emailjs.com/sdk/${version}/email.min.js`;
+          makeAndAppend(src);
+        });
+      }
+
+      function genOrderNumber() {
+        const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+        let s = "";
+        for (let i = 0; i < 5; i++)
+          s += chars[Math.floor(Math.random() * chars.length)];
+        return "ALB-" + s + "-" + Date.now().toString().slice(-4);
+      }
+
+      function cartTotal() {
+        return cart.reduce((s, i) => s + i.price * i.qty, 0);
+      }
+      function cartCount() {
+        return cart.reduce((s, i) => s + i.qty, 0);
+      }
+      function shipping() {
+        return cartTotal() >= 35 ? 0 : 3.99;
+      }
+
+      function updateBadge() {
+        const b = document.getElementById("cart-badge");
+        const n = cartCount();
+        b.textContent = n;
+        b.style.display = n > 0 ? "flex" : "none";
+      }
+
+      function addToCart(id) {
+        const p = PRODUCTS.find((x) => x.id === id);
+        const ex = cart.find((x) => x.id === id);
+        if (ex) ex.qty++;
+        else cart.push({ ...p, qty: 1 });
+        updateBadge();
+        const btn = document.getElementById("add-" + id);
+        if (btn) {
+          btn.textContent = "Hinzugefügt";
+          btn.classList.add("added");
+          btn.disabled = true;
+          setTimeout(() => {
+            btn.textContent = "+ In den Warenkorb";
+            btn.classList.remove("added");
+            btn.disabled = false;
+          }, 1400);
+        }
+      }
+
+      function changeQty(id, delta) {
+        const i = cart.findIndex((x) => x.id === id);
+        if (i < 0) return;
+        cart[i].qty += delta;
+        if (cart[i].qty <= 0) cart.splice(i, 1);
+        updateBadge();
+        showPage("cart");
+      }
+
+      function showPage(name) {
+        document
+          .querySelectorAll(".nav-btn")
+          .forEach((b) => b.classList.remove("active"));
+        const nb = document.getElementById("nav-" + name);
+        if (nb) nb.classList.add("active");
+        const main = document.getElementById("main");
+        main.innerHTML = "";
+        const wrap = document.createElement("div");
+        wrap.className = "page-wrap";
+        if (name === "shop") wrap.innerHTML = shopHTML();
+        else if (name === "cart") wrap.innerHTML = cartHTML();
+        else if (name === "checkout") wrap.innerHTML = checkoutHTML();
+        else if (name === "confirmation") wrap.innerHTML = confirmHTML();
+        main.appendChild(wrap);
+        window.scrollTo(0, 0);
+        // Observe product cards for reveal animation
+        if (typeof observeProducts === "function") observeProducts();
+      }
+
+      function shopHTML() {
+        return `
+  <div class="hero">
+    <div class="hero-c">
+      <span class="hero-ar">مرحباً بكم</span>
+      <h1>Islamische Produkte mit Herz &amp; Qualität</h1>
+      <div class="divider"></div>
+      <p>Alles für dein tägliches islamisches Leben – Sunnah-konform, handverlesen, mit Liebe kuratiert.</p>
+    </div>
+  </div>
+  <div class="nl-strip">
+    <div class="nl-inner">
+      <h3>Newsletter abonnieren</h3>
+      <p>Neuheiten, Angebote & islamische Tipps direkt in dein Postfach.</p>
+      ${
+        nlDone
+          ? '<p class="nl-ok">Jazakallahu Khairan! Du bist angemeldet.</p>'
+          : `
+      <div class="nl-form">
+        <input type="email" id="nl-email" placeholder="deine@email.de">
+        <button class="btn-nl" onclick="subscribeNewsletter()">Anmelden</button>
+      </div>`
+      }
+    </div>
+  </div>
+  <section class="prods">
+    <div class="sec-hdr">
+      <h2>Unsere Produkte</h2>
+      <p>Halal · Sunnah-konform · Geprüfte Qualität</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="grid">
+      ${PRODUCTS.map(
+        (p) => `
+      <div class="card">
+        <div class="card-img">
+          <img src="hero-pic.png" alt="${p.name}">
+          ${p.badge ? `<div class="card-badge">${p.badge}</div>` : ""}
+        </div>
+        <div class="card-body">
+          <div class="card-name">${p.name}</div>
+          <div class="card-desc">${p.desc}</div>
+          <div class="card-foot">
+            <div class="card-price">${p.price.toFixed(2)} €<small>/ ${p.unit}</small></div>
+            <button class="btn-add" id="add-${p.id}" onclick="addToCart(${p.id})">+ In den Warenkorb</button>
+          </div>
+        </div>
+      </div>`,
+      ).join("")}
+    </div>
+  </section>`;
+      }
+
+      function subscribeNewsletter() {
+        const v = document.getElementById("nl-email").value.trim();
+        if (!v || !v.includes("@")) {
+          alert("Bitte gib eine gültige E-Mail ein.");
+          return;
+        }
+
+        // Button feedback (falls vorhanden)
+        const nlBtn = document.querySelector(".btn-nl");
+        const _origBtnText = nlBtn ? nlBtn.textContent : null;
+        if (nlBtn) {
+          nlBtn.disabled = true;
+          nlBtn.textContent = "Sende...";
+        }
+        debugLog("subscribeNewsletter: start " + v);
+
+        // Positive islamische Begrüßungsnachricht (an Empfänger)
+        const message = `Assalamu Alaikum,
+
+Vielen Dank für dein Interesse an unserem Newsletter. Möge Allah dich mit Gutem belohnen. Wir freuen uns, dich mit Neuigkeiten, Angeboten und nützlichen islamischen Tipps zu versorgen.
+
+Barakallahu feek!`;
+
+        // If EmailJS is configured, send an automated email to the user.
+        // You must replace 'YOUR_EMAILJS_USER_ID', 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID'
+        // with real values from your EmailJS account.
+        // Versuch: wenn SDK vorhanden, direkt senden; sonst dynamisch nachladen und dann senden
+        function doSend() {
+          debugLog("doSend: preparing params and calling emailjs.send");
+          ensureEmailJSInit();
+          // Provide many common template params — some EmailJS templates expect
+          // different variable names for the recipient. Sending multiple keys
+          // prevents "recipients address is empty" when template uses another name.
+          const params = {
+            to_email: v,
+            to: v,
+            email: v,
+            user_email: v,
+            reply_to: v,
+            to_name: v.split("@")[0],
+            user_name: v.split("@")[0],
+            from_name: "Al-Baraka Shop",
+            shop_name: "Al-Baraka Shop",
+            message: message,
+          };
+          try {
+            debugLog("doSend: params -> " + JSON.stringify(params));
+          } catch (e) {
+            debugLog("doSend: params prepared");
+          }
+          // Call send() without passing the public key here — init() is used instead.
+          return emailjs.send("service_4r78upo", "template_nul4zod", params);
+        }
+
+        if (window.emailjs && typeof emailjs.send === "function") {
+          debugLog("EmailJS present, sending directly");
+          doSend()
+            .then(() => {
+              debugLog("EmailJS send: success");
+              nlDone = true;
+              showPage("shop");
+              alert("Danke! Eine Bestätigungs-E-Mail wurde versendet.");
+            })
+            .catch((err) => {
+              console.error("EmailJS error", err);
+              let details = "Unbekannter Fehler";
+              try {
+                if (err && err.text) details = err.text;
+                else if (err && err.statusText) details = err.statusText;
+                else if (err && err.message) details = err.message;
+                else details = JSON.stringify(err);
+              } catch (e) {
+                details = String(err);
+              }
+              debugLog("EmailJS send: failed - " + details);
+              alert(
+                "E-Mail konnte nicht gesendet werden: " +
+                  details +
+                  "\nBitte prüfe Service-/Template-/Public Key in EmailJS und die Netzwerkverbindung.",
+              );
+            })
+            .finally(() => {
+              if (nlBtn) {
+                nlBtn.disabled = false;
+                nlBtn.textContent = _origBtnText || "Anmelden";
+              }
+            });
+          return;
+        }
+
+        // SDK fehlt -> versuche es dynamisch nachzuladen
+        debugLog("EmailJS not present, loading SDK...");
+        loadEmailJSSDK("3.2.0", 7000)
+          .then(() => {
+            try {
+              if (emailjs && typeof emailjs.init === "function") {
+                emailjs.init("9n_IzzLSxM5ouT5z2");
+                debugLog("EmailJS init after load");
+              } else {
+                debugLog("EmailJS init: emailjs or init not found after load");
+              }
+            } catch (e) {
+              console.warn("EmailJS init after load failed", e);
+              debugLog(
+                "EmailJS init after load failed: " +
+                  (e && e.message ? e.message : String(e)),
+              );
+            }
+            return doSend();
+          })
+          .then(() => {
+            debugLog("EmailJS dynamic send: success");
+            nlDone = true;
+            showPage("shop");
+            alert("Danke! Eine Bestätigungs-E-Mail wurde versendet.");
+          })
+          .catch((err) => {
+            console.error("EmailJS dynamic load/send error", err);
+            let details = "Unbekannter Fehler";
+            try {
+              if (err && err.message) details = err.message;
+              else details = JSON.stringify(err);
+            } catch (e) {
+              details = String(err);
+            }
+            debugLog("EmailJS dynamic load/send error: " + details);
+            alert(
+              "E-Mail konnte nicht gesendet werden: " +
+                details +
+                "\nPrüfe Netzwerk, CDN‑Zugriff und EmailJS‑Konfiguration (Service/Template/Public Key).",
+            );
+          })
+          .finally(() => {
+            if (nlBtn) {
+              nlBtn.disabled = false;
+              nlBtn.textContent = _origBtnText || "Anmelden";
+            }
+          });
+      }
+
+      function cartHTML() {
+        if (cart.length === 0)
+          return `<div class="page"><div class="empty"><div class="empty-ic"></div><h3>Dein Warenkorb ist leer</h3><p>Füge islamische Produkte hinzu und starte deine Bestellung.</p><br><button class="btn-p" style="max-width:240px;margin:16px auto 0" onclick="showPage('shop')">Zum Shop</button></div></div>`;
+        const tot = cartTotal(),
+          sh = shipping();
+        return `<div class="page">
+    <h1 class="page-title">Dein Warenkorb</h1>
+    <p class="page-sub">${cart.length} Produkt${cart.length !== 1 ? "e" : ""} in deinem Warenkorb</p>
+    <div class="cart-items">
+      ${cart
+        .map(
+          (i) => `<div class="ci">
+        <div class="ci-em">${i.em}</div>
+        <div class="ci-info"><div class="ci-name">${i.name}</div><div class="ci-pr">${i.price.toFixed(2)} € / ${i.unit}</div></div>
+        <div class="qty-ctrl">
+          <button class="qbtn" onclick="changeQty(${i.id},-1)">−</button>
+          <span class="qnum">${i.qty}</span>
+          <button class="qbtn" onclick="changeQty(${i.id},1)">+</button>
+        </div>
+        <div class="ci-tot">${(i.price * i.qty).toFixed(2)} €</div>
+      </div>`,
+        )
+        .join("")}
+    </div>
+    <div class="summary">
+      <div class="srow"><span>Zwischensumme</span><span>${tot.toFixed(2)} €</span></div>
+      <div class="srow"><span>Versand</span><span>${sh === 0 ? "Gratis" : sh.toFixed(2) + " €"}</span></div>
+      ${sh > 0 ? `<div class="srow" style="font-size:12px"><span>Noch ${(35 - tot).toFixed(2)} € bis Gratis-Versand</span></div>` : ""}
+      <div class="stot"><span>Gesamt</span><span>${(tot + sh).toFixed(2)} €</span></div>
+    </div>
+    <button class="btn-p" onclick="showPage('checkout')">Zur Kasse →</button>
+    <button class="btn-s" onclick="showPage('shop')">← Weiter einkaufen</button>
+  </div>`;
+      }
+
+      function checkoutHTML() {
+        const tot = cartTotal(),
+          sh = shipping(),
+          grand = tot + sh;
+        return `<div class="page">
+      <h1 class="page-title">Kasse</h1>
+      <p class="page-sub">Fast geschafft! Füll deine Daten aus.</p>
+    <div class="omini">
+      <h4>Deine Bestellung</h4>
+      ${cart.map((i) => `<div class="orow"><span>${i.name} × ${i.qty}</span><span>${(i.price * i.qty).toFixed(2)} €</span></div>`).join("")}
+      <div class="orow"><span>Versand</span><span>${sh === 0 ? "Gratis" : sh.toFixed(2) + " €"}</span></div>
+      <div class="ototrow"><span>Gesamt</span><span>${grand.toFixed(2)} €</span></div>
+    </div>
+    <div class="cof">
+    <div class="fsec">Persönliche Daten</div>
+      <div class="fr">
+        <div class="fg"><label class="flabel">Vorname *</label><input class="finput" id="f-fn" placeholder="Ahmad"></div>
+        <div class="fg"><label class="flabel">Nachname *</label><input class="finput" id="f-ln" placeholder="Al-Rashid"></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label class="flabel">E-Mail *</label><input class="finput" id="f-em" type="email" placeholder="ahmad@email.de"></div>
+        <div class="fg"><label class="flabel">Telefon</label><input class="finput" id="f-ph" type="tel" placeholder="+49 170 ..."></div>
+      </div>
+      <div class="fsec">Lieferadresse</div>
+      <div class="fr" style="grid-template-columns:2fr 1fr">
+        <div class="fg"><label class="flabel">Straße *</label><input class="finput" id="f-st" placeholder="Musterstraße"></div>
+        <div class="fg"><label class="flabel">Hausnr.</label><input class="finput" id="f-hn" placeholder="12a"></div>
+      </div>
+      <div class="fr" style="grid-template-columns:1fr 2fr">
+        <div class="fg"><label class="flabel">PLZ *</label><input class="finput" id="f-zp" placeholder="12345"></div>
+        <div class="fg"><label class="flabel">Stadt *</label><input class="finput" id="f-ct" placeholder="Hamburg"></div>
+      </div>
+      <div class="fsec">Zahlungsart</div>
+      <div class="fg">
+        <select class="finput">
+          <option>Vorkasse (Überweisung)</option>
+          <option>PayPal</option>
+          <option>Klarna – Kauf auf Rechnung</option>
+          <option>Kreditkarte</option>
+        </select>
+      </div>
+      <div class="cbx"><input type="checkbox" id="f-nl"><label for="f-nl">Ich möchte den Newsletter erhalten und über Angebote informiert werden.</label></div>
+      <div class="cbx"><input type="checkbox" id="f-agb"><label for="f-agb">Ich habe die AGB gelesen und akzeptiere sie. *</label></div>
+      <div id="form-err" style="color:#e74c3c;font-size:13px"></div>
+      <button class="btn-p" id="order-btn" onclick="submitOrder(${grand.toFixed(2)},${sh.toFixed(2)})">Jetzt bestellen – ${grand.toFixed(2)} €</button>
+      <button class="btn-s" onclick="showPage('cart')">← Zurück zum Warenkorb</button>
+    </div>
+  </div>`;
+      }
+
+      function submitOrder(grand, sh) {
+        const fn = document.getElementById("f-fn").value.trim();
+        const ln = document.getElementById("f-ln").value.trim();
+        const em = document.getElementById("f-em").value.trim();
+        const st = document.getElementById("f-st").value.trim();
+        const zp = document.getElementById("f-zp").value.trim();
+        const ct = document.getElementById("f-ct").value.trim();
+        const agb = document.getElementById("f-agb").checked;
+        const nl = document.getElementById("f-nl").checked;
+        const errs = [];
+        if (!fn) errs.push("Vorname fehlt");
+        if (!ln) errs.push("Nachname fehlt");
+        if (!em.includes("@")) errs.push("Ungültige E-Mail");
+        if (!st) errs.push("Straße fehlt");
+        if (!/^\d{5}$/.test(zp)) errs.push("PLZ muss 5 Ziffern haben");
+        if (!ct) errs.push("Stadt fehlt");
+        if (!agb) errs.push("Bitte AGB akzeptieren");
+        if (errs.length > 0) {
+          document.getElementById("form-err").textContent =
+            "Fehler: " + errs.join(" · ");
+          return;
+        }
+        const btn = document.getElementById("order-btn");
+        btn.textContent = "Bestellung wird aufgegeben...";
+        btn.disabled = true;
+        const orderNumber = genOrderNumber();
+        const hn = document.getElementById("f-hn").value.trim();
+        setTimeout(() => {
+          currentOrder = {
+            firstName: fn,
+            lastName: ln,
+            email: em,
+            street: st,
+            houseNr: hn,
+            zip: zp,
+            city: ct,
+            newsletter: nl,
+            items: [...cart],
+            grandTotal: grand,
+            shipping: sh,
+            orderNumber,
+          };
+          cart = [];
+          updateBadge();
+          showPage("confirmation");
+        }, 900);
+      }
+
+      function confirmHTML() {
+        const o = currentOrder;
+        if (!o) return '<div class="page"><p>Fehler.</p></div>';
+        setTimeout(() => {
+          const en = document.getElementById("email-note");
+          if (en) {
+            en.innerHTML = `<strong>E-Mail gesendet!</strong> Bestätigung mit Bestellnummer an <strong>${o.email}</strong> gesendet.`;
+          }
+        }, 1600);
+        return `<div class="page conf">
+    <div class="conf-ic" aria-hidden="false" role="img" aria-label="Bestätigung">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="1.5"></circle>
+        <path d="M7.5 12.5l2.5 2.5L16.5 9.5" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <h1 class="page-title">Bestellung bestätigt!</h1>
+    <p class="page-sub">Assalamu Alaikum, ${o.firstName}! Deine Bestellung wurde erfolgreich aufgegeben.</p>
+    <div class="onbox">
+      <div class="onlabel">Deine Bestellnummer</div>
+      <div class="onval">${o.orderNumber}</div>
+    </div>
+    <div class="enote" id="email-note">
+      <strong>Sende E-Mail...</strong> Du erhältst gleich eine Bestätigung an ${o.email}.
+    </div>
+    ${o.newsletter ? `<div class="enote" style="border-color:var(--green)"><strong>Newsletter:</strong> Du wirst ab sofort über Neuheiten informiert. Barakallahu Feek!</div>` : ""}
+    <div class="order-items-box">
+      <div class="oi-title">Bestellübersicht</div>
+      ${o.items.map((i) => `<div class="oi-row"><span>${i.name} × ${i.qty}</span><span>${(i.price * i.qty).toFixed(2)} €</span></div>`).join("")}
+      <div class="oi-row"><span>Versand</span><span>${o.shipping == 0 ? "Gratis" : o.shipping + " €"}</span></div>
+      <div class="oi-tot"><span>Gesamt</span><span>${parseFloat(o.grandTotal).toFixed(2)} €</span></div>
+      <div class="addr-box"><strong>Lieferung an:</strong> ${o.street} ${o.houseNr}, ${o.zip} ${o.city}</div>
+    </div>
+    <p class="dua">جَزَاكَ اللَّهُ خَيْرًا</p>
+    <p class="dua-tr">„Möge Allah dich mit Gutem belohnen" – Danke für dein Vertrauen!</p>
+    <br>
+    <button class="btn-p" style="max-width:260px;margin:0 auto" onclick="showPage('shop')">Weiter einkaufen</button>
+  </div>`;
+      }
+
+      // Init
+      showPage("shop");
+
+      // Navbar: dezenter Glas-Effekt beim Scrollen
+      (function () {
+        const hdr = document.querySelector(".hdr");
+        if (!hdr) return;
+        function onScroll() {
+          if (window.scrollY > 20) hdr.classList.add("scrolled");
+          else hdr.classList.remove("scrolled");
+        }
+        document.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+
+      // Reveal products when they enter the viewport
+      function observeProducts() {
+        const cards = document.querySelectorAll(".card");
+        if (!cards || cards.length === 0) return;
+        const io = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                obs.unobserve(e.target);
+              }
+            });
+          },
+          { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+        );
+        cards.forEach((c) => io.observe(c));
+      }
+    </script>
+    <!-- On-page debug box (hidden until logs appear) -->
+  </body>
+</html>
