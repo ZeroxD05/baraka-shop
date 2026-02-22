@@ -76,7 +76,21 @@
       select {
         font-family: "Lato", sans-serif;
       }
+      .btn-buy {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 8px 12px;
+        background: #c9a227;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: 0.2s;
+      }
 
+      .btn-buy:hover {
+        background: #a8841f;
+      }
       /* HEADER */
       .hdr {
         background: var(--green);
@@ -917,29 +931,6 @@
           >
             Produkte
           </button>
-          <button
-            class="cart-btn"
-            onclick="showPage('cart')"
-            aria-label="Warenkorb"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M6 6h13l-1.5 9h-11z"></path>
-              <circle cx="9" cy="20" r="1.5"></circle>
-              <circle cx="18" cy="20" r="1.5"></circle>
-            </svg>
-            <span class="badge" id="cart-badge" style="display: none">0</span>
-          </button>
         </nav>
       </div>
     </header>
@@ -974,78 +965,32 @@
       const PRODUCTS = [
         {
           id: 1,
-          em: "",
           name: "Miswak Premium",
           badge: "Sunnah",
           desc: "Natürlicher Zahnreiniger aus Arak-Holz. Antibakteriell, stärkt Zahnfleisch & Sunnah des Propheten ﷺ.",
           price: 3.99,
           unit: "Stück",
+          paypal: "https://www.paypal.com/ncp/payment/QB8QKV2WGMDNG",
         },
         {
           id: 2,
-          em: "",
-          name: "Miswak 5er Pack",
+          name: "Kufi",
           badge: "Bestseller",
-          desc: "Das praktische 5er-Set – ideal für die ganze Familie. Frisch verpackt aus Medinah.",
-          price: 14.99,
+          desc: "Traditionelle islamische Kopfbedeckung aus hochwertiger Baumwolle. Bequem, atmungsaktiv & Sunnah-konform.",
+          price: 7.99,
           unit: "Set",
+          paypal: "https://www.paypal.com/paypalme/DEINLINK2",
         },
         {
           id: 3,
-          em: "",
           name: "Medjool Datteln 500g",
           badge: "Premium",
           desc: "Saftige Medjool-Datteln Güteklasse A – die Königin der Datteln. Handverlesen, ohne Zusätze.",
           price: 8.99,
           unit: "500g",
-        },
-        {
-          id: 4,
-          em: "",
-          name: "Ajwa Datteln 250g",
-          badge: "Sunnah",
-          desc: "Die heilige Dattel aus Medinah. Über den Propheten ﷺ überliefert. Dunkel, zart & aromatisch.",
-          price: 12.49,
-          unit: "250g",
-        },
-        {
-          id: 5,
-          em: "",
-          name: "Deglet Nour 1kg",
-          badge: "Familienpack",
-          desc: "Goldgelbe, halbtrocken Datteln – perfekt zum Iftar & Kochen. Naturbelassen.",
-          price: 9.99,
-          unit: "1kg",
-        },
-        {
-          id: 6,
-          em: "",
-          name: "Kufi Mütze – Weiß",
-          badge: "Klassisch",
-          desc: "Traditionelle weiße Kufi-Gebetsmütze aus Baumwolle. Leicht, atmungsaktiv, handgefertigt.",
-          price: 7.99,
-          unit: "Stück",
-        },
-        {
-          id: 7,
-          em: "",
-          name: "Kufi – Creme Stickerei",
-          badge: "Handarbeit",
-          desc: "Elegante Kufi in Creme mit traditionellem Stickereimuster. 100% Baumwolle, handgefertigt.",
-          price: 12.99,
-          unit: "Stück",
-        },
-        {
-          id: 8,
-          em: "",
-          name: "Kufi – Schwarz Gehäkelt",
-          badge: "Traditionell",
-          desc: "Handgehäkelte schwarze Kufi im marokkanischen Stil. Robuste Qualität, sitzt sicher.",
-          price: 10.99,
-          unit: "Stück",
+          paypal: "https://www.paypal.com/paypalme/DEINLINK3",
         },
       ];
-
       let cart = [];
       let currentOrder = null;
       let nlDone = false;
@@ -1189,51 +1134,6 @@
         return "ALB-" + s + "-" + Date.now().toString().slice(-4);
       }
 
-      function cartTotal() {
-        return cart.reduce((s, i) => s + i.price * i.qty, 0);
-      }
-      function cartCount() {
-        return cart.reduce((s, i) => s + i.qty, 0);
-      }
-      function shipping() {
-        return cartTotal() >= 35 ? 0 : 3.99;
-      }
-
-      function updateBadge() {
-        const b = document.getElementById("cart-badge");
-        const n = cartCount();
-        b.textContent = n;
-        b.style.display = n > 0 ? "flex" : "none";
-      }
-
-      function addToCart(id) {
-        const p = PRODUCTS.find((x) => x.id === id);
-        const ex = cart.find((x) => x.id === id);
-        if (ex) ex.qty++;
-        else cart.push({ ...p, qty: 1 });
-        updateBadge();
-        const btn = document.getElementById("add-" + id);
-        if (btn) {
-          btn.textContent = "Hinzugefügt";
-          btn.classList.add("added");
-          btn.disabled = true;
-          setTimeout(() => {
-            btn.textContent = "+ In den Warenkorb";
-            btn.classList.remove("added");
-            btn.disabled = false;
-          }, 1400);
-        }
-      }
-
-      function changeQty(id, delta) {
-        const i = cart.findIndex((x) => x.id === id);
-        if (i < 0) return;
-        cart[i].qty += delta;
-        if (cart[i].qty <= 0) cart.splice(i, 1);
-        updateBadge();
-        showPage("cart");
-      }
-
       function showPage(name) {
         document
           .querySelectorAll(".nav-btn")
@@ -1293,14 +1193,14 @@
           <img src="hero-pic.png" alt="${p.name}">
           ${p.badge ? `<div class="card-badge">${p.badge}</div>` : ""}
         </div>
-        <div class="card-body">
-          <div class="card-name">${p.name}</div>
-          <div class="card-desc">${p.desc}</div>
-          <div class="card-foot">
-            <div class="card-price">${p.price.toFixed(2)} €<small>/ ${p.unit}</small></div>
-            <button class="btn-add" id="add-${p.id}" onclick="addToCart(${p.id})">+ In den Warenkorb</button>
-          </div>
-        </div>
+       <div class="card-body">
+  <div class="card-name">${p.name}</div>
+  <div class="card-desc">${p.desc}</div>
+  <div class="card-price">${p.price.toFixed(2)} € / ${p.unit}</div>
+  <a href="${p.paypal}" target="_blank" class="btn-buy">
+    Jetzt kaufen
+  </a>
+</div>
       </div>`,
       ).join("")}
     </div>
